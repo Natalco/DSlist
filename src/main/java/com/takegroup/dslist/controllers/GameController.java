@@ -1,14 +1,12 @@
 package com.takegroup.dslist.controllers;
 //API
 
+import com.takegroup.dslist.dto.GameDTO;
 import com.takegroup.dslist.dto.GameMinDTO;
 import com.takegroup.dslist.entities.Game;
 import com.takegroup.dslist.services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,7 +17,13 @@ public class GameController {
     @Autowired
     private GameService gameService;
 
-    @GetMapping
+
+    @GetMapping(value = "/{id}")
+    public GameDTO findById(@PathVariable Long id) {
+        GameDTO result = gameService.findById(id);
+        return result;
+    }
+        @GetMapping
     public List<GameMinDTO> findAll() {
     List<GameMinDTO> result = gameService.findAll();
     return result;
